@@ -1,0 +1,52 @@
+﻿@model SimpleChat.Models.BasicCookie
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+    <title>HSW site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../Content/style_login.css" media="screen" type="text/css" />
+</head>
+<body>
+    
+    <div id="LoginForm">
+
+        <p> <img src="../images/logo_1.png" alt="CHAT FROM the Hard Siberian Women" hspace="3" align="middle"></p>
+        <form action="/" method="post">
+            @Html.AntiForgeryToken()
+            <fieldset class="form-group">
+                <p>
+                    <span class="fontawesome-user"><i class="fa fa-user fa-lg"></i></span>
+                    <input id="Nickname" name="Nickname" type="text" value="Login" onBlur="if(this.value == '') this.value = ' Login'" onFocus="if(this.value == 'Login') this.value = ''" required>
+                </p>
+                <p>
+                    <span class="fontawesome-lock"><i class="fa fa-lock fa-lg"></i></span>
+                    <input id="Password" name="Password" type="password" value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required>
+                </p>
+                <input type="submit" value="Enter" class="btn btn-default" />
+            </fieldset>
+        </form>
+        @if (Model.GetErrorList() != null)
+        {
+            foreach (var item in Model.GetErrorList())
+            {
+                <i style="color:red"> @item</i><br>
+            }
+        }
+        <div class="center">
+            <p>
+                <i class="fa fa-user-secret fa-lg" style="color:#606468"></i>
+                No account?
+                &nbsp;&nbsp; <i class="fa fa-hand-o-right fa-lg" style="color:#606468"> </i> <a href="/Login/Register">Register</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

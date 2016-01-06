@@ -1,0 +1,67 @@
+﻿@model SimpleChat.Models.BasicCookie
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HSW site</title>
+</head>
+<body>
+    <div class="father_box" align="right">
+        <div class="box">
+            <div class="hat_box">
+                Friends
+            </div>
+            <div class="wrap">
+                <table class="table">
+                    <tr width="100%">
+                        <th width="30%">
+                            Nickname
+                        </th>
+                        <th width="15%">
+                            Age
+                        </th>
+                        <th width="30%">
+                           Last visit
+                        </th>
+                        <th width="25%"> Delete | Go to </th>
+                    </tr>
+
+                    @foreach (var item in Model.GetUserList())
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nickname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Age)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastVisit)
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/User/DeleteFriend/@item.Id?userId=@Model.GetUser().Id" class="fa fa-user-secret fa-2x"></a>&nbsp;&nbsp;|
+                                &nbsp;
+                                <a href="/User/RedirectToCreateChat/@item.Id?userId=@Model.GetUser().Id" class="fa fa-weixin fa-2x"></a>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div id="UserSearchBox" >
+
+    <i style="color:#606468; font-size: 20px">Find friends&nbsp;</i>
+    <a href="/User/AllUsers?userId= @Model.GetUser().Id" class="fa fa-search fa-2x"></a>
+</div>
+        </div>
+
+    </div>
+</body>
+</html>
